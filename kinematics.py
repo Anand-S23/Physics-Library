@@ -1,12 +1,16 @@
-class kinematics:
-    def __init__(self, equation=None, init_vel=None, final_vel=None, acc=None, delta_time=None):
-        self.equation = equation 
-        self.init_vel = init_vel
-        self.final_vel = final_vel
-        self.acc = acc
-        self.delta_time = delta_time
+class Kinematics:
+    def __init__(self, **kwargs): 
+        givens = {
+            'init_vel': None, 
+            'final_vel': None,
+            'acc': None,
+            'delta_time': None
+        }
+
+        for (field, val) in givens.items():
+            setattr(self, field, kwargs.get(field, val))
     
-    def find_final_vel(self):
+    def final_velocity(self):
         # V = Vo + at
         if None not in (self.init_vel, self.acc, self.delta_time):
             self.final_vel = self.init_vel + self.acc * self.delta_time
@@ -14,7 +18,7 @@ class kinematics:
         else:
             return "NOT ENOUGH GIVENS"
     
-    def find_acc(self):
+    def average_acc(self):
         # a = (V - Vo) / t
         if None not in (self.init_vel, self.final_vel, self.delta_time):
             self.acc = (self.final_vel - self.init_vel) / self.delta_time
@@ -24,5 +28,5 @@ class kinematics:
 
 # Testing purposes
 if __name__ == '__main__':
-    x = kinematics(init_vel=5, acc=-9.8, delta_time=10)
-    print(x.find_final_vel())
+    x = Kinematics(init_vel=5, acc=-9.8, delta_time=10)
+    print(x.final_velocity())
