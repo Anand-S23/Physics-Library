@@ -6,6 +6,7 @@ class KinematicBody:
             'dx': None,
             'initial_x': None,
             'final_x': None,
+            'ave_vel': None,
             'initial_vel': None, 
             'final_vel': None,
             'acc': None,
@@ -38,7 +39,10 @@ class KinematicBody:
             self.initial_vel = (2 * self.dx) / self.time - self.final_vel
         # Vo = sqrt(V**2 - 2a*delta x)
         elif None not in (self.final_vel, self.acc, self.dx):
-            self.initial_vel = self.final_vel - 2 * self.acc * self.dx
+            self.initial_vel = math.sqrt(self.final_vel**2 - 2 * self.acc * self.dx)
+        # Vo = (delta x - (1/2)at^2) t 
+        elif None not in (self.dx, self.acc, self.time):
+            self.initial_vel = (self.dx - .5 * self.acc * self.time**2) / self.time
         else: 
             return "NOT ENOUGH GIVENS"
         return self.initial_vel
@@ -49,7 +53,10 @@ class KinematicBody:
             self.final_vel = self.initial_vel + self.acc * self.time
         # V = 2 delta x / t - Vo
         elif None not in (self.initial_vel, self.final_vel, self.time):
-            self.final_vel = 2*self.dx / self.time - self.initial_vel
+            self.final_vel = 2*self.dx / self.time - self.
+        # V = sqrt(Vo^2 + 2ax)
+        elif None not in (self.initial_vel, self.acc, self.dx):
+            self.initial_vel = math.sqrt(self.initial_vel**2 + 2 * self.acc * self.dx)
         else:
             return "NOT ENOUGH GIVENS"
         return self.final_vel
