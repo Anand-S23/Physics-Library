@@ -13,7 +13,7 @@ class Kinematics:
         for (field, val) in givens.items():
             setattr(self, field, kwargs.get(field, val))
     
-    def delta_x(self):
+    def displacement(self):
         # delta x = (delta v / 2) * t
         if None not in (self.initial_vel, self.final_vel, self.time):
             self.dx = ((self.initial_vel + self.final_vel) / 2) * self.time 
@@ -34,20 +34,21 @@ class Kinematics:
             return "NOT ENOUGH GIVENS"
         return self.final_vel
     
-    def ave_acceleration(self):
+    def acceleration(self):
         # a = (V - Vo) / t
         if None not in (self.initial_vel, self.final_vel, self.time):
             self.acc = (self.final_vel - self.initial_vel) / self.time
         else: 
             return "NOT ENOUGH GIVENS"
         return self.acc
+    
 
 # Testing purposes
 if __name__ == '__main__':
     x = Kinematics(initial_vel=0, acc=3.2, time=32.8)
-    x2 = Kinematics(initial_vel=5, final_vel=13, time=2)
-    print(x.delta_x())
+    x2 = Kinematics(initial_vel=0, final_vel=10, time=10)
+    print(x.displacement())
     print(x.final_velocity())
-    print(x2.delta_x())
+    print(x2.displacement())
     print(x2.final_velocity())
     print(x2.ave_acceleration())
