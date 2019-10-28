@@ -18,7 +18,7 @@ object = physics_lib.Kinematics(#parameters)
 - inital_vel: the starting velocity
 - final_vel: the ending velocity
 - acc: the acceraltion
-- time: the time period 
+- t: the t period 
  
 
 ### Some example code: 
@@ -27,7 +27,7 @@ object = physics_lib.Kinematics(#parameters)
 from physics_lib import Kinematics
 
 # Creating the object - car in this case 
-car = Kinematics(inital_vel=0, final_vel=10, time=10)
+car = Kinematics(inital_vel=0, final_vel=10, t=10)
 # finding the acceleration of the object, can also find other information such as the displacement
 car_acc = car.accleration()
 
