@@ -25,7 +25,9 @@ Some example code:
 ``` py
 import kinematics
 
+# Creating the object - car in this case 
 car = Kinematics(inital_vel=0, final_vel=10, time=10)
+# finding the acceleration of the object, can also find other information such as the displacement
 car_acc = car.accleration()
 
 print(car_acc)
