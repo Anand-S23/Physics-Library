@@ -1,4 +1,6 @@
-class Kinematics:
+import math
+
+class KinematicBody:
     def __init__(self, **kwargs): 
         givens = {
             'dx': None,
@@ -17,12 +19,30 @@ class Kinematics:
         # delta x = (delta v / 2) * t
         if None not in (self.initial_vel, self.final_vel, self.time):
             self.dx = ((self.initial_vel + self.final_vel) / 2) * self.time 
+        # delta x = Vo*t + (1/2)a*t^2
         elif None not in (self.initial_vel, self.acc, self.time):
             self.dx = self.initial_vel * self.time + .5 * self.acc * self.time**2 
+        # delta x = (V^2 - Vo^2) / 2a
+        elif None not in (self.final_vel, self.final_vel, self.acc):
+            self.dx = (self.final_vel**2 - self.initial_vel**2) / (2 * self.acc)
         else:
             return "NOT ENOUGH GIVENS"
         return self.dx
-        
+    
+    def initial_velocity(self):
+        # Vo = V - a*t
+        if None not in (self.final_vel, self.acc, self.time):
+            self.initial_vel = self.final_vel - (self.acc * self.time)
+        # Vo = 2 delta x / t - V
+        elif None not in (self.dx, self.time, self.final_vel):
+            self.initial_vel = (2 * self.dx) / self.time - self.final_vel
+        # Vo = sqrt(V**2 - 2a*delta x)
+        elif None not in (self.final_vel, self.acc, self.dx):
+            self.initial_vel = self.final_vel - 2 * self.acc * self.dx
+        else: 
+            return "NOT ENOUGH GIVENS"
+        return self.initial_vel
+
     def final_velocity(self):
         # V = Vo + at
         if None not in (self.initial_vel, self.acc, self.time):
