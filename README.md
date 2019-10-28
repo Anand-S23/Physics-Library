@@ -22,7 +22,7 @@ Parameters
 
 Some example code: 
 
-```
+``` py
 import kinematics
 
 car = Kinematics(inital_vel=0, final_vel=10, time=10)
