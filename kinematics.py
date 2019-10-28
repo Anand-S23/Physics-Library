@@ -44,7 +44,10 @@ class Kinematics:
 
 # Testing purposes
 if __name__ == '__main__':
-    x = Kinematics(initial_vel=5, acc=-9.8, time=10)
-    x2 = Kinematics(initial_vel=5, final_vel=10, time=2)
+    x = Kinematics(initial_vel=0, acc=3.2, time=32.8)
+    x2 = Kinematics(initial_vel=5, final_vel=13, time=2)
+    print(x.delta_x())
     print(x.final_velocity())
     print(x2.delta_x())
+    print(x2.final_velocity())
+    print(x2.ave_acceleration())
