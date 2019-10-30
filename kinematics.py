@@ -87,7 +87,14 @@ class KinematicBody:
         return self.acc
 
     def time(self):
-        pass
+        # t = (V - Vo) / a
+        if None in (self.initial_vel, self.final_vel, self.acc):
+            self.time = (self.final_vel - self.initial_vel) / self.acc
+        else:
+            return "NOT ENOUGH GIVENS"
+        return self.time 
+    
+        
     
 
 # Testing purposes
