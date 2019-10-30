@@ -2,7 +2,7 @@ import math
 
 class KinematicBody:
     def __init__(self, **kwargs): 
-        givens = {
+        self.givens = {
             'dx': None,
             'initial_x': None,
             'final_x': None,
@@ -13,14 +13,14 @@ class KinematicBody:
             't': None,
         }
 
-        for (field, val) in givens.items():
+        for (field, val) in self.givens.items():
             setattr(self, field, kwargs.get(field, val))
     
     def __str__(self):
         return 'KinematicBody class'
 
     def __repr__(self):
-        return 'KinematicBody()'
+        return 'KinematicBody({})'.format(', '.join([val for (field, val) in self.givens.items()]))
 
     def displacement(self):
         # delta x = (delta v / 2) * t
@@ -93,9 +93,7 @@ class KinematicBody:
         else:
             return "NOT ENOUGH GIVENS"
         return self.time 
-    
-        
-    
+
 
 # Testing purposes
 if __name__ == '__main__':
